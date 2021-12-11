@@ -64,27 +64,27 @@ void show_menu(void){
    Loops until the game is over, and then sets the function pointer to menu */
 void play_game(void){
 
-	   if(timeout == stored_timeout)
+	   if (timeout == stored_timeout)
 	       return;
 
 	   stored_timeout = timeout;
 
 	   pressed_button = getbtns();
 
-           if(pressed_button)
-	      stored_button = pressed_button;
+           if (pressed_button)
+	       stored_button = pressed_button;
 
-	   if(old_button != stored_button){
-	      old_button = stored_button;
+	   if (old_button != stored_button){
+	       old_button = stored_button;
 
-	       if(stored_button & 1)
-		  direction = DIRECTION_RIGHT;
+	       if (stored_button & 1)
+		   direction = DIRECTION_RIGHT;
 	       
-	       else if(stored_button & 2)
-		       direction = DIRECTION_DOWN;
+	       else if (stored_button & 2)
+		        direction = DIRECTION_DOWN;
 		
-	       else if(stored_button & 8)
-	               direction = DIRECTION_LEFT;
+	       else if (stored_button & 8)
+	                direction = DIRECTION_LEFT;
 	
 	       else
 	            direction = DIRECTION_UP;
@@ -92,6 +92,6 @@ void play_game(void){
 
 	   /* Return 0 = Game over
 	      Return 1 = Continue playing */
-	   if(!game_iteration(direction))
-	       selectedFunc = &show_menu;
+	   if (!game_iteration(direction))
+	        selectedFunc = &show_menu;
 }
