@@ -21,19 +21,19 @@ bool b = true;
 /*  Program entry point for SNAKE game.  */
 int main(void){
 
-		io_init();
-		labinit();
-		display_init();
-		display_clearBuffer();
-		display_buffer_update();
-		selectedFunc = &show_menu;
+	io_init();
+	labinit();
+	display_init();
+	display_clearBuffer();
+	display_buffer_update();
+	selectedFunc = &show_menu;
 
-		while(1)
+	while(1)
 
-			/*  Calling function using function pointer  */
-			selectedFunc();
+		/*  Calling function using function pointer  */
+		selectedFunc();
 
-		return 0;
+	return 0;
 }
 
 
@@ -49,13 +49,13 @@ void show_menu(void){
 			  display_string(3, "               ");
 			  display_update();
 
-	  		if ((getbtns() & 1) || (getbtns() & 2) || (getbtns() & 4) || (getbtns() & 8)){
+			if ((getbtns() & 1) || (getbtns() & 2) || (getbtns() & 4) || (getbtns() & 8)){
 						game_reset(getsw());
-				 		selectedFunc = &play_game;
- 						b = false;
-		  	}
+						selectedFunc = &play_game;
+						b = false;
+			}
 
-			} while(b);
+		   } while(b);
 }
 
 
@@ -68,26 +68,29 @@ void play_game(void){
 
 	   stored_timeout = timeout;
 
-		 pressed_button = getbtns();
+	   pressed_button = getbtns();
 
-		 if (pressed_button)
-				 stored_button = pressed_button;
+           if (pressed_button)
+	       stored_button = pressed_button;
 
 	   if (old_button != stored_button){
-	    	 old_button = stored_button;
+	       old_button = stored_button;
 
-				 if (stored_button & 1)
-						 direction = DIRECTION_RIGHT;
-				 else if (stored_button & 2)
-						 direction = DIRECTION_DOWN;
-				 else if (stored_button & 8)
-			       direction = DIRECTION_LEFT;
-			   else
-			       direction = DIRECTION_UP;
-	  	}
+	       if (stored_button & 1)
+		   direction = DIRECTION_RIGHT;
+	       
+	       else if (stored_button & 2)
+		   direction = DIRECTION_DOWN;
+		
+	       else if (stored_button & 8)
+	           direction = DIRECTION_LEFT;
+	
+	       else
+	           direction = DIRECTION_UP;
+	   }
 
-			/* Return 0 = Game over
-			   Return 1 = Continue playing */
-	  	if (!game_iteration(direction))
-			    selectedFunc = &show_menu;
+	   /* Return 0 = Game over
+	      Return 1 = Continue playing */
+	   if (!game_iteration(direction))
+	        selectedFunc = &show_menu;
 }
