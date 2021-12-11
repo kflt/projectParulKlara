@@ -49,7 +49,7 @@ void show_menu(void){
 			  display_string(3, "               ");
 			  display_update();
 
-			if ((getbtns() & 1) || (getbtns() & 2) || (getbtns() & 4) || (getbtns() & 8)){
+			  if ((getbtns() & 1) || (getbtns() & 2) || (getbtns() & 4) || (getbtns() & 8)){
 						game_reset(getsw());
 						selectedFunc = &play_game;
 						b = false;
