@@ -74,8 +74,8 @@ void display_init(void){
 	spi_send_recv(0xDA);
 	spi_send_recv(0x20);
 
-	/* Horizontal address mode */
 	spi_send_recv(0x20);
+	/* Horizontal address mode */
 	spi_send_recv(0x00);
 
 	spi_send_recv(0xAF);
@@ -134,9 +134,9 @@ char * itoaconv(int num){
   static char itoa_buffer[ ITOA_BUFSIZ ];
   static const char maxneg[] = "-2147483648";
 
-  itoa_buffer[ ITOA_BUFSIZ - 1 ] = 0;   /* Insert the end-of-string marker.			 */
+  itoa_buffer[ ITOA_BUFSIZ - 1 ] = 0;   /* Insert the end-of-string marker.	 */
   sign = num;                           /* Save sign.                            */
-  if( num < 0 && num - 1 > 0 )          /* Check for most negative integer 			 */
+  if( num < 0 && num - 1 > 0 )          /* Check for most negative integer 	 */
   {
     for( i = 0; i < sizeof( maxneg ); i += 1 )
     itoa_buffer[ i + 1 ] = maxneg[ i ];
@@ -144,12 +144,12 @@ char * itoaconv(int num){
   }
   else
   {
-    if( num < 0 ) num = -num;           /* Make number positive.                 */
-    i = ITOA_BUFSIZ - 2;                /* Location for first ASCII digit.       */
+    if( num < 0 ) num = -num;            /* Make number positive.                 */
+    i = ITOA_BUFSIZ - 2;                 /* Location for first ASCII digit.       */
     do {
-      itoa_buffer[ i ] = num % 10 + '0';/* Insert next digit.                    */
-      num = num / 10;                   /* Remove digit from number.             */
-      i -= 1;                           /* Move index to next empty position.    */
+      itoa_buffer[ i ] = num % 10 + '0'; /* Insert next digit.                    */
+      num = num / 10;                    /* Remove digit from number.             */
+      i -= 1;                            /* Move index to next empty position.    */
     } while( num > 0 );
     if( sign < 0 )
     {
@@ -180,13 +180,13 @@ void display_buffer_update(void){
 
 	DISPLAY_CHANGE_TO_COMMAND_MODE;
 
-	spi_send_recv(0x22);								/* Send set page command	 */
-	spi_send_recv(0);										/* Start section					 */
-	spi_send_recv(3);										/* End section 						 */
+	spi_send_recv(0x22);				/* Send set page command   */
+	spi_send_recv(0);				/* Start section	   */
+	spi_send_recv(3);				/* End section 	           */
 
-	spi_send_recv(0x21);								/* Send set column command */
-	spi_send_recv(0);										/* Start column 					 */
-	spi_send_recv(127);									/* End column              */
+	spi_send_recv(0x21);				/* Send set column command */
+	spi_send_recv(0);				/* Start column            */
+	spi_send_recv(127);				/* End column              */
 
 	DISPLAY_CHANGE_TO_DATA_MODE;
 	int i;
@@ -265,7 +265,7 @@ void set_directionbuffer(int x, int y, int dir){
 void game_reset(int sw){
 
 	display_clearBuffer();
-	set_walls(sw);								/* set_walls updates walls in display buffer */
+	set_walls(sw);		     /* set_walls updates walls in display buffer */
 
 	snakesize = 8;
 	int pos = (SCREEN_HEIGHT - snakesize) / 2;
@@ -278,14 +278,14 @@ void game_reset(int sw){
 	}
 
 	head_x = SCREEN_WIDTH / 2;   /* x-position 64 */
-	head_y = pos;          			 /* y-position 12 */
+	head_y = pos;          	     /* y-position 12 */
 
 	tail_x = SCREEN_WIDTH / 2;   /* x-position 64, same as head */
 	tail_y = pos + (i - 1);      /* y-position 19, snake has start length 8 (12 inclusive to 19 inclusive) */
 
 	score = 0;
 	get_apple();
-	display_buffer_update();									/* Update display */
+	display_buffer_update();     /* Update display */
 
 	invalid_direction = DIRECTION_DOWN;
 }
@@ -304,10 +304,10 @@ void set_walls(int sw){
 		    set_displaybuffer(x, 31, 1);
 		}
 
-		for (y = 0; y < SCREEN_HEIGHT; y++){
+		for(y = 0; y < SCREEN_HEIGHT; y++){
 		     
-		     set_displaybuffer(0, y, 1);
-	             set_displaybuffer(127, y, 1);
+		    set_displaybuffer(0, y, 1);
+	            set_displaybuffer(127, y, 1);
 	 	}
 	}
 }
