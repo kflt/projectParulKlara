@@ -60,7 +60,7 @@ void show_menu(void){
 
 
 /* Stores the current button and selects the direction accordingly
-	 Loops until the game is over, and then sets the function pointer to menu */
+   Loops until the game is over, and then sets the function pointer to menu */
 void play_game(void){
 
 	   if (timeout == stored_timeout)
